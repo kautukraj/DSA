@@ -11,6 +11,7 @@ int main()
 	int i_n1 = 0; 
 	int i_n2 = 0; 
     int i,j,carry=0,n1,n2,sum=0;
+    
     for (i=0;i<(len1+len2);i++)
         result[i]=0;
         
@@ -35,7 +36,7 @@ int main()
 		} 
  
 		if (carry > 0) 
-			result[i_n1 + i_n2] += carry; 
+			result[i_n1 + i_n2] += carry; // +=
 
 		i_n1++; 
 	}

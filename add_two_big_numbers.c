@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-// numbers are of same length. What if they aren't?
+// numbers are of same length. What if they aren't? Add sufficient number of 0's to the front.
 // do using linked list as well as in Python 
 // subtraction of such numbers
 // groups of 4
@@ -39,7 +39,7 @@ int main()
         result[i] = carry % 10;
         carry = carry / 10;
     }
-    result[i] = carry;
+    result[i] = carry; // important line 
 
     for (i=len;i>=0;i--)
     {

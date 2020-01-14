@@ -1,45 +1,53 @@
 #include <stdio.h>
-#include <string.h>
-int main()
-{
-    char num1 [] = "123";
-    char num2 [] = "12";
-    int len1 = strlen(num1);
-	int len2 = strlen(num2); 
-    //printf("%d %d\n", len1,len2);
-	int result[len1+len2];
-	int i_n1 = 0; 
-	int i_n2 = 0; 
-    int i,j,carry=0,n1,n2,sum=0;
-    for (i=0;i<(len1+len2);i++)
-        result[i]=0;
-        
-	for (i=len1-1; i>=0; i--) 
-	{ 
-		n1 = num1[i] - '0'; 
-		printf("Value of n1 = %d\n",n1);
-		i_n2 = 0; 
-			 
-		for (j=len2-1; j>=0; j--) 
-		{ 
+#include <time.h>
 
-			n2 = num2[j] - '0'; 
-			printf("Value of n2 = %d\n",n2);
-			sum = n1*n2 + result[i_n1 + i_n2] + carry; 
-			printf("Value of sum = %d\n",sum);
-			carry = sum/10; 
-			result[i_n1 + i_n2] = sum % 10; 
-			printf("Value stored at %dth position is %d\n",(i_n1+i_n2),result[i_n1+i_n2]);
-            //printf("%d ",result[i_n1+i_n2]);
-			i_n2++; 
-		} 
- 
-		if (carry > 0) 
-			result[i_n1 + i_n2] += carry; 
+void factorial(int);
+int multiply(int,int[],int);
 
-		i_n1++; 
-	}
+void factorial(int n) 
+{ 
+	int res[10000]; 
+ 	int x,i;
+	res[0] = 1; 
+	int res_size = 1; 
 	
-}
+	for (x=2; x<=n; x++) 
+		res_size = multiply(x, res, res_size); 
 
+	for (i=res_size-1; i>=0; i--) 
+		printf("%d",res[i]); 
+} 
+
+int multiply(int x, int res[], int res_size) 
+{ 
+	int carry = 0; 
+    int i;
+    for (i=0; i<res_size; i++) 
+	{ 
+		int prod = res[i] * x + carry; 
+
+		res[i] = prod % 10;
+		carry = prod/10;	 
+	} 
+
+	while (carry!=0) 
+	{ 
+		res[res_size] = carry%10; 
+		carry = carry/10; 
+		res_size++; 
+	} 
+	return res_size; 
+} 
+
+// Driver program 
+int main() 
+{ 
+	clock_t t; 
+    t = clock(); 
+    int a = 3000;
+    factorial(a); 
+    t = clock() - t; 
+    double time_taken = ((double)t)/CLOCKS_PER_SEC;
+    printf("\nfactorial() took %f seconds to execute %d!\n", time_taken,a); 
+} 
 
