@@ -6,12 +6,14 @@ int partition(int arr[],int i,int j,int pivot)
 {
     int l=i;
     int r=j;
-    while(l<=r){
+    while(l<=r)
+    {
         while(l<=r && arr[l]<=pivot) 
             l++;
         while(l<=r && arr[r]>pivot) 
             r--;
-        if(l<=r) {
+        if(l<=r) 
+        {
             swap(arr[l],arr[r]);
             l++; 
             r--;

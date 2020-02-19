@@ -1,29 +1,54 @@
-#include <stdio.h>
-#include <string.h>
+#include<string.h>
+#include<stdio.h>
+#include<stdlib.h>
+int count_zero(int l,int r,char*s)
+{
+  int i;
+  int count=0;
+  for(i=l;i<=r;i++)
+  {
+    if(s[i]=='0')
+    {
+      count++;
+    }
+  }
+  return count;
+}
+int count_one(int l,int r,char*s)
+{
+  int i;
+  int count=0;
+  for(i=l;i<=r;i++)
+  {
+    if(s[i]=='1')
+    {
+      count++;
+    }
+  }
+  return count;
+}
+int findk(int l,int r,char*s)
+{
+  int k,mid=(l+r)/2;
+  if(count_one(l,mid,s)==count_zero(mid+1,r,s))
+  return mid;
+  else if(count_one(l,mid,s)>count_zero(mid+1,r,s))
+  {
+    findk(l,mid,s);
+  }
+  else if(count_one(l,mid,s)<count_zero(mid+1,r,s))
+  {
+    findk(mid+1,r,s);
+  }
+  return -1;
+}
 int main()
 {
-    // all digits same is not allowed
-    // where we are drawing line is inclusive
-    char str [] = "0011";
-    int l = strlen(str);
-    int freq[l]; int count=0;
-    for (int i=0; i<l; i++)
-        freq[i]=0;
-        
-    for (int i=0; i<l; i++)
-    {
-        if (str[i]=='0')
-            count++;
-        freq[i] = count;    
-    }
-    
-    for (int i=0;i<l;i++)
-        printf("%d ",freq[i]);
-    for (int i=0;i<l;i++)
-    {
-        if (freq[i] == l-i-1-freq[l-1]+freq[i])
-            printf("\n%d\n",i);
-        //printf("%d = %d\n",freq[i],l-freq[n]);    
-    }
-    return 0;
+  int v;
+  char s[20];
+  scanf("%s",s);
+  int l=strlen(s);
+  v=findk(0,l-1,s);
+  printf("%d\n",v);
+
 }
